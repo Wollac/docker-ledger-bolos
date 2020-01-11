@@ -9,6 +9,9 @@ RUN apt-get update \
     make gcc libncurses5:i386 libc6-dev-i386 \
     && rm -rf /var/lib/apt/lists/*
 
+# Make Python 3 the default
+RUN ln -s /usr/bin/python3 /usr/bin/python \
+    && ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Setting up the Toolchain
 ENV BOLOS_ENV /opt/bolos
@@ -21,6 +24,6 @@ RUN mkdir -p $BOLOS_ENV/clang-arm-fropi \
     && curl -L https://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz \
     | tar -xJC $BOLOS_ENV/clang-arm-fropi --strip 1
 
-# Python Loader
-RUN pip3 install --no-cache-dir setuptools wheel
-RUN pip3 install --no-cache-dir ledgerblue
+# Install the Python loader    
+RUN pip install --no-cache-dir setuptools wheel
+RUN pip install --no-cache-dir ledgerblue
