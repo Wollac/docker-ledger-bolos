@@ -21,7 +21,8 @@ RUN mkdir -p $BOLOS_ENV/gcc-arm-none-eabi-5_3-2016q1 \
 
 RUN mkdir -p $BOLOS_ENV/clang-arm-fropi \
     && curl -L https://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz \
-    | tar -xJC $BOLOS_ENV/clang-arm-fropi --strip-components=1 --exclude="share"
+    | tar -xJC $BOLOS_ENV/clang-arm-fropi --strip-components=1 --exclude="share" \
+    && rm -rf $BOLOS_ENV/clang-arm-fropi/include
 
 # Install the Python loader    
 RUN pip install --no-cache-dir setuptools wheel
